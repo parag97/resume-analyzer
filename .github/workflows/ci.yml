@@ -93,6 +93,10 @@ jobs:
             --assignee "$SP_OID" \
             --query "[].{role:roleDefinitionName, scope:scope}" \
             -o table
+            
+      - name: get id
+        run: az account list --query "[].{name:name, id:id}" -o table
+
       - name: Show Current Subscription
         run: |
           az account show -o table
