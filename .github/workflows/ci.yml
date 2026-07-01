@@ -85,12 +85,6 @@ jobs:
       - name: Build Docker Image
         run: docker build -t resume-analyzer:${{ github.sha }} .
 
-  login-azure:
-    name: Login to Azure
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -99,3 +93,15 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Verify Azure Login
         run: az account show
+      - name: locing to Acr
+        run: az acr login --name paragcr97
+          - name: Tag Docker Image
+      - name: Tag Docker Image
+        run: |
+        docker tag \
+          resume-analyzer:${{ github.sha }} \
+          paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
+      - name: Push Docker Image
+        run: |
+        docker push \
+          paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
