@@ -73,6 +73,7 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build \
+            --load \
             -t resume-analyzer:${{ github.sha }} .
 
       - name: Azure Login
@@ -84,6 +85,14 @@ jobs:
 
       - name: Verify Azure Login
         run: az account show
+
+      - name: Check role assignment scope
+        run: |
+          SP_OID=$(az ad sp show --id ${{ secrets.AZURE_CLIENT_ID }} --query id -o tsv)
+          az role assignment list \
+            --assignee "$SP_OID" \
+            --query "[].{role:roleDefinitionName, scope:scope}" \
+            -o table
       - name: Show Current Subscription
         run: |
           az account show -o table
