@@ -97,10 +97,8 @@ jobs:
         run: az acr login --name paragcr97
       - name: Tag Docker Image
         run: |
-        docker tag \
-          resume-analyzer:${{ github.sha }} \
-          paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
+          docker tag \
+            resume-analyzer:${{ github.sha }} \
+            paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
       - name: Push Docker Image
-        run: |
-        docker push \
-          paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
+        run: docker push \paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
