@@ -95,7 +95,6 @@ jobs:
         run: az account show
       - name: locing to Acr
         run: az acr login --name paragcr97
-          - name: Tag Docker Image
       - name: Tag Docker Image
         run: |
         docker tag \
