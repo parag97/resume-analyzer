@@ -86,7 +86,7 @@ jobs:
         run: az account show
 
       - name: Login to Azure Container Registry
-         run: |
+        run: |
           ACR_TOKEN=$(az acr login \
             --name paragacr97 \
             --expose-token \
