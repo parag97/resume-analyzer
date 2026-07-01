@@ -84,7 +84,12 @@ jobs:
 
       - name: Verify Azure Login
         run: az account show
-
+      - name: Check ACR authorization mode
+        run: |
+          az acr show \
+            --name paragacr97 \
+            --query "{loginServer:loginServer,roleMode:roleAssignmentPermissionMode}" \
+            -o json
       - name: Login to Azure Container Registry
         run: |
           ACR_TOKEN=$(az acr login \
@@ -96,6 +101,11 @@ jobs:
             --username 00000000-0000-0000-0000-000000000000 \
             --password-stdin
 
+      - name: Check ACR Login
+        run: |
+          docker info
+          cat ~/.docker/config.json
+      
       - name: Tag Docker Image
         run: |
           docker tag \
