@@ -94,7 +94,7 @@ jobs:
       - name: Verify Azure Login
         run: az account show
       - name: locing to Acr
-        run: az acr login --name paragcr97
+        run: az acr login --name paragacr97
       - name: Tag Docker Image
         run: |
           docker tag \
