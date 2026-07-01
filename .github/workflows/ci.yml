@@ -84,6 +84,12 @@ jobs:
 
       - name: Verify Azure Login
         run: az account show
+      - name: Show Current Subscription
+        run: |
+          az account show -o table
+      - name: List ACRs
+        run: |
+          az acr list -o table
       - name: Check ACR authorization mode
         run: |
           az acr show \
