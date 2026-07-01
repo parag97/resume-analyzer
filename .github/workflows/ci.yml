@@ -93,7 +93,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Verify Azure Login
         run: az account show
-      - name: locing to Acr
+      - name: logging in to Acr
         run: az acr login --name paragacr97
       - name: Tag Docker Image
         run: |
@@ -101,4 +101,4 @@ jobs:
             resume-analyzer:${{ github.sha }} \
             paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
       - name: Push Docker Image
-        run: docker push \paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
+        run: docker push paragacr97.azurecr.io/resume-analyzer:${{ github.sha }}
